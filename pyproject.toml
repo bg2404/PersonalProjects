@@ -12,6 +12,10 @@ dependencies = [
     "matplotlib (>=3.10.1,<4.0.0)",
     "google-generativeai (>=0.8.4,<0.9.0)",
     "python-dotenv (>=1.1.0,<2.0.0)",
+    "black (>=25.1.0,<26.0.0)",
+    "openai (>=1.69.0,<2.0.0)",
+    "ruff (>=0.11.2,<0.12.0)",
+    "pillow (>=11.1.0,<12.0.0)",
 ]
 
 
@@ -21,3 +25,30 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 package-mode = false
+
+[tool.black]
+skip-string-normalization = true
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "C901",  # too complex
+]
+
+[tool.ruff.isort]
+order-by-type = true
+relative-imports-order = "closest-to-furthest"
+extra-standard-library = ["typing"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+known-first-party = []
