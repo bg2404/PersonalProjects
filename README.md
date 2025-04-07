@@ -100,12 +100,12 @@ This project requires API keys for the generative model providers and X (Twitter
 
 1. **Activate the Poetry virtual environment:**
     ```bash
-    poetry shell
+    source .venv/bin/activate
     ```
 
 2. **Run the Streamlit application:**
     ```bash
-    streamlit run main.py
+    poetry run streamlit run main.py
     ```
 
     This will start the Streamlit server, and the application should open automatically in your default web browser. You can typically access it at `http://localhost:8501`.
