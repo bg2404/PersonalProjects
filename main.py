@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Streamlit App Hub",
     page_icon="🚀",
-    layout="wide" # Use "wide" layout for better spacing of columns
+    layout="wide",  # Use "wide" layout for better spacing of columns
 )
 
 st.title("🚀 Welcome to the Streamlit App Hub!")
@@ -17,12 +17,13 @@ st.header("Explore the Tools")
 
 col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
+col5, _ = st.columns(2)
 
 with col1:
     st.subheader("🏠 Mortgage Calculator")
     st.markdown("Calculate monthly mortgage payments based on loan amount, interest rate, and term.")
     # Use st.page_link for internal navigation (Streamlit 1.33+)
-    if hasattr(st, 'page_link'):
+    if hasattr(st, "page_link"):
         st.page_link("pages/1_Mortgage_Calculator.py", label="Go to Calculator", icon="🏠")
     else:
         # Fallback for older Streamlit versions assumes page filename is the URL path
@@ -31,7 +32,7 @@ with col1:
 with col2:
     st.subheader("💬 Chatbot")
     st.markdown("Interact with different AI chat models.")
-    if hasattr(st, 'page_link'):
+    if hasattr(st, "page_link"):
         st.page_link("pages/2_Chatbot.py", label="Start Chatting", icon="💬")
     else:
         st.markdown("[Start Chatting](2_Chatbot)")
@@ -40,7 +41,7 @@ with col3:
     st.subheader("🖼️ Multimodal Query")
     st.markdown("Ask questions using text and an optional uploaded image.")
     # Ensure the link points to the correct file name if you renamed it
-    if hasattr(st, 'page_link'):
+    if hasattr(st, "page_link"):
         st.page_link("pages/3_Multimodal_Query.py", label="Ask with Image", icon="🖼️")
     else:
         # Update link text if file renamed
@@ -49,10 +50,18 @@ with col3:
 with col4:
     st.subheader("🎨 Image Generator")
     st.markdown("Generate images from text prompts using AI models.")
-    if hasattr(st, 'page_link'):
+    if hasattr(st, "page_link"):
         st.page_link("pages/4_Image_Generator.py", label="Generate Image", icon="🎨")
     else:
         st.markdown("[Generate Image](4_Image_Generator)")
+
+with col5:
+    st.subheader("📲 Tweet Generator")
+    st.markdown("Generate tweets based on selected personality and content type.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/5_Tweet_Generator.py", label="Generate Tweet", icon="📲")
+    else:
+        st.markdown("[Generate Tweet](5_Tweet_Generator)")
 
 st.divider()
 

@@ -1,6 +1,8 @@
 import streamlit as st
-from widgets.select_model import select_model
+
 from utils.api_client import get_api_client
+from widgets.select_model import select_model
+
 
 def setup_sidebar(model_options: dict):
     """
@@ -16,22 +18,22 @@ def setup_sidebar(model_options: dict):
     with st.sidebar:
         st.header("Configuration")
         selected_model_name, api_config = select_model(model_options)
-        api_name = api_config.get('name', 'Selected API')
-        api_key = api_config.get('key')
-        api_url = api_config.get('url')
+        api_name = api_config.get("name", "Selected API")
+        api_key = api_config.get("key")
+        api_url = api_config.get("url")
 
         if not api_key:
             # Determine expected env var for error message
-            env_var_name = "OPENAI_API_KEY" # Default assumption
+            env_var_name = "OPENAI_API_KEY"  # Default assumption
             if "Gemini" in api_name:
                 env_var_name = "GEMINI_API_KEY"
             elif "OpenAI" in api_name:
-                 env_var_name = "OPENAI_API_KEY"
+                env_var_name = "OPENAI_API_KEY"
 
             st.error(f"API Key for {api_name} not found.")
             st.info(f"Please ensure your `.env` file defines `{env_var_name}`.")
             if api_url:
-                 st.link_button(f"Get {api_name} API key", f"{api_url}", icon="🔑")
+                st.link_button(f"Get {api_name} API key", f"{api_url}", icon="🔑")
             st.stop()
 
         # Proactive warning for Imagen as it often requires billing setup

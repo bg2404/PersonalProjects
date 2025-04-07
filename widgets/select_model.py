@@ -1,5 +1,7 @@
+from typing import Any, Dict, Tuple
+
 import streamlit as st
-from typing import Dict, Tuple, Any
+
 
 def select_model(model_options: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
     """

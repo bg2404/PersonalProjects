@@ -1,26 +1,12 @@
-import os
-from dotenv import load_dotenv
+from utils.api import GEMINI_API, OPENAI_API
 
-load_dotenv(override=True)
-
-GEMINI_API = {
-    "name": "Gemini",
-    "key": os.getenv("GEMINI_API_KEY"),
-    "url": os.getenv("GEMINI_API_URL", "https://aistudio.google.com/app/apikey"),
-    "base_url": os.getenv("GEMINI_BASE_URL"),
-}
-OPENAI_API = {
-    "name": "OpenAI",
-    "key": os.getenv("OPENAI_API_KEY"),
-    "url": os.getenv("OPENAI_API_URL", "https://platform.openai.com/api-keys"),
-    "base_url": os.getenv("OPENAI_BASE_URL"),
-}
 
 class Model:
     """Represents an AI model with its configuration."""
-    name: str       # User-friendly display name (e.g., "GPT-4o")
-    model_name: str # API identifier (e.g., "gpt-4o")
-    api: dict       # Associated API configuration (GEMINI_API or OPENAI_API)
+
+    name: str  # User-friendly display name (e.g., "GPT-4o")
+    model_name: str  # API identifier (e.g., "gpt-4o")
+    api: dict  # Associated API configuration (GEMINI_API or OPENAI_API)
 
     def __init__(self, name, model_name, api):
         self.name = name
@@ -32,6 +18,7 @@ class Model:
 
     def __str__(self):
         return self.name
+
 
 # Text Models
 GEMINI_2_0_FLASH = Model(

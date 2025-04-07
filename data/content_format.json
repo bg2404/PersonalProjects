@@ -1,0 +1,12 @@
+{
+    "Text": "Primarily text-based content such as short posts, updates, threads, quotes, questions, and announcements.",
+    "Image": "Visual content including static images, photos, illustrations, infographics, and memes, often accompanied by captions.",
+    "Short-Form Video": "Brief video content typically ranging from a few seconds to a few minutes, suitable for platforms like TikTok, Reels, and YouTube Shorts. Can include dances, skits, quick tutorials, behind-the-scenes glimpses, and trending challenges.",
+    "Long-Form Video": "Longer video content exceeding a few minutes, often found on platforms like YouTube. Includes vlogs, tutorials, interviews, reviews, storytimes, and in-depth discussions.",
+    "Live Stream": "Real-time video broadcasts allowing for direct interaction with the audience through chat and live Q&A.",
+    "Audio (Podcast/Clips)": "Audio-based content such as podcasts, audio essays, music, or short audio clips shared on relevant platforms.",
+    "Stories (Ephemeral Content - Text, Image, Video)": "Temporary content formats (e.g., Instagram Stories, Snapchat Stories) that disappear after a set duration, often used for casual updates, behind-the-scenes glimpses, and interactive elements like polls and quizzes.",
+    "Polls and Quizzes (Interactive)": "Interactive content formats that allow the audience to participate by answering questions or expressing opinions.",
+    "Carousels/Galleries (Mixed Media)": "Posts containing multiple images or a mix of images and short videos that users can swipe through.",
+    "Links to External Content": "Sharing links to relevant articles, websites, resources, or other external media."
+}

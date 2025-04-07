@@ -1,7 +1,7 @@
-import streamlit as st
-from openai import RateLimitError, APIError, BadRequestError, APIConnectionError, AuthenticationError
-import traceback
 import base64
+
+import streamlit as st
+from openai import APIConnectionError, APIError, AuthenticationError, BadRequestError, RateLimitError
 
 try:
     from models.llm import IMAGE_MODEL_OPTIONS
@@ -65,8 +65,8 @@ if st.button("Generate Image"):
                         st.download_button(
                             label="Download Image",
                             data=image_bytes,
-                            file_name=f"{prompt[:30].replace(' ','_')}.png",
-                            mime="image/png"
+                            file_name=f"{prompt[:30].replace(' ', '_')}.png",
+                            mime="image/png",
                         )
                     except Exception as decode_error:
                         st.error(f"Error decoding base64 image data: {decode_error}")
@@ -81,9 +81,9 @@ if st.button("Generate Image"):
             except RateLimitError as e:
                 st.error(f"API Rate Limit Error: {e}")
             except BadRequestError as e:
-                 st.error(f"API Request Error: {e}")
+                st.error(f"API Request Error: {e}")
             except APIError as e:
-                st.error(f"API Error: Status {e.status_code}. {e}")
+                st.error(f"API Error: {e}")
             except Exception as e:
                 st.error(f"An unexpected error occurred during the API call: {e}")
                 # traceback.print_exc() # For debugging in console if needed

@@ -1,7 +1,5 @@
 import streamlit as st
-from openai import RateLimitError, APIError, BadRequestError
-import traceback
-import time # Kept for potential re-introduction of sleep
+from openai import APIError, BadRequestError, RateLimitError
 
 try:
     from models.llm import TEXT_MODEL_OPTIONS
@@ -26,9 +24,7 @@ st.title("💬 Chatbot")
 st.caption(f"🚀 Powered by {selected_model_name}")
 
 if "chatbot_messages" not in st.session_state:
-    st.session_state["chatbot_messages"] = [
-        {"role": "assistant", "content": "How can I help you?"}
-    ]
+    st.session_state["chatbot_messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
 for msg in st.session_state.chatbot_messages:
     st.chat_message(msg["role"]).write(msg["content"])
@@ -62,10 +58,10 @@ if prompt := st.chat_input("Ask me anything..."):
 
     except RateLimitError as e:
         st.error(f"API Rate Limit Error: Please wait and try again. {e}")
-    except APIError as e:
-        st.error(f"API Error: {e.status_code} - {e.message}")
     except BadRequestError as e:
-         st.error(f"API Request Error: {e.message}")
+        st.error(f"API Request Error: {e.message}")
+    except APIError as e:
+        st.error(f"API Error: {e.message}")
     except Exception as e:
         st.error(f"An unexpected error occurred during the API call: {e}")
         # traceback.print_exc() # For debugging in console if needed

@@ -1,8 +1,7 @@
-import streamlit as st
-from openai import RateLimitError, APIError, BadRequestError, NotFoundError
 import base64
-import io
-import traceback
+
+import streamlit as st
+from openai import APIError, BadRequestError, NotFoundError, RateLimitError
 
 try:
     from models.llm import TEXT_MODEL_OPTIONS
@@ -55,11 +54,10 @@ if st.button("Submit Query"):
                 image_bytes = uploaded_file.getvalue()
                 image_base64 = base64.b64encode(image_bytes).decode("utf-8")
                 # Determine mime type (basic example, relying on browser info)
-                mime_type = uploaded_file.type or "image/jpeg" # Default if type unknown
-                content_payload.append({
-                    "type": "image_url",
-                    "image_url": {"url": f"data:{mime_type};base64,{image_base64}"}
-                })
+                mime_type = uploaded_file.type or "image/jpeg"  # Default if type unknown
+                content_payload.append(
+                    {"type": "image_url", "image_url": {"url": f"data:{mime_type};base64,{image_base64}"}}
+                )
             except Exception as e:
                 st.error(f"Error processing uploaded image: {e}")
                 st.stop()
@@ -70,23 +68,27 @@ if st.button("Submit Query"):
                 try:
                     response = client.chat.completions.create(
                         model=selected_model_name,
-                        messages=[{
-                            "role": "user",
-                            "content": content_payload,
-                        }],
-                        max_tokens=1024
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": content_payload,
+                            }
+                        ],
+                        max_tokens=1024,
                     )
                     model_response_content = response.choices[0].message.content
                     st.markdown(model_response_content)
 
                 except RateLimitError as e:
                     st.error(f"API Rate Limit Error: {e}")
-                except APIError as e:
-                    st.error(f"API Error: {e.status_code} - {e.message}")
                 except NotFoundError as e:
-                    st.error(f"Model Not Found Error: '{selected_model_name}' may not be available or support multimodal input. {e}")
+                    st.error(
+                        f"Model Not Found Error: '{selected_model_name}' may not be available or support multimodal input. {e}"
+                    )
                 except BadRequestError as e:
                     st.error(f"API Request Error: {e.message}")
+                except APIError as e:
+                    st.error(f"API Error: {e.message}")
                 except Exception as e:
                     st.error(f"An unexpected error occurred during the API call: {e}")
                     # traceback.print_exc() # For debugging in console if needed

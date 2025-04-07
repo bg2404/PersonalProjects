@@ -1,8 +1,10 @@
-import streamlit as st
-import pandas as pd
 import math
 
+import pandas as pd
+import streamlit as st
+
 st.set_page_config(page_title="Mortgage Calculator", page_icon="🏠")
+
 
 def calculate_monthly_payment(principal, annual_interest_rate, years):
     """
@@ -21,7 +23,7 @@ def calculate_monthly_payment(principal, annual_interest_rate, years):
         if years > 0:
             return principal / (years * 12)
         else:
-            return float('inf')
+            return float("inf")
 
     monthly_interest_rate = (annual_interest_rate / 100) / 12
     number_of_payments = years * 12
@@ -35,10 +37,11 @@ def calculate_monthly_payment(principal, annual_interest_rate, years):
         return monthly_payment
     except OverflowError:
         st.error("Calculation resulted in an overflow. Please check your input values.")
-        return float('inf')
+        return float("inf")
     except ZeroDivisionError:
         st.error("Calculation resulted in division by zero. This might happen with invalid inputs.")
-        return float('inf')
+        return float("inf")
+
 
 st.title("🏠 Mortgage Repayments Calculator")
 st.write("Enter your loan details to calculate monthly payments and see the amortization schedule.")
@@ -49,12 +52,18 @@ st.write("### Input Loan Details")
 col1, col2 = st.columns(2)
 
 with col1:
-    home_value = st.number_input("Home Value (₹)", min_value=0, value=10000000, step=50000, help="Total value of the property.")
+    home_value = st.number_input(
+        "Home Value (₹)", min_value=0, value=10000000, step=50000, help="Total value of the property."
+    )
     deposit = st.number_input("Deposit (₹)", min_value=0, value=1000000, step=10000, help="Amount paid upfront.")
 
 with col2:
-    interest_rate = st.number_input("Annual Interest Rate (%)", min_value=0.0, value=5.50, step=0.05, format="%.2f", help="Annual interest rate.")
-    loan_term = st.number_input("Loan Term (years)", min_value=1, max_value=50, value=30, step=1, help="Duration of the loan in years.")
+    interest_rate = st.number_input(
+        "Annual Interest Rate (%)", min_value=0.0, value=5.50, step=0.05, format="%.2f", help="Annual interest rate."
+    )
+    loan_term = st.number_input(
+        "Loan Term (years)", min_value=1, max_value=50, value=30, step=1, help="Duration of the loan in years."
+    )
 
 st.divider()
 
@@ -66,8 +75,7 @@ if loan_amount < 0:
 
 monthly_payment = calculate_monthly_payment(loan_amount, interest_rate, loan_term)
 
-if monthly_payment != float('inf') and loan_amount > 0:
-
+if monthly_payment != float("inf") and loan_amount > 0:
     number_of_payments = loan_term * 12
     total_payments = monthly_payment * number_of_payments
     total_interest = total_payments - loan_amount
@@ -114,7 +122,7 @@ if monthly_payment != float('inf') and loan_amount > 0:
             {
                 "Month": i,
                 "Year": year,
-                "Payment": monthly_payment_adj, # Use adjusted payment for final month if needed
+                "Payment": monthly_payment_adj,  # Use adjusted payment for final month if needed
                 "Principal Paid": principal_payment,
                 "Interest Paid": interest_payment,
                 "Remaining Balance": remaining_balance,
@@ -124,12 +132,16 @@ if monthly_payment != float('inf') and loan_amount > 0:
     schedule_df = pd.DataFrame(schedule)
 
     with st.expander("View Full Payment Schedule Table"):
-        st.dataframe(schedule_df.style.format({
-            "Payment": "₹{:,.2f}",
-            "Principal Paid": "₹{:,.2f}",
-            "Interest Paid": "₹{:,.2f}",
-            "Remaining Balance": "₹{:,.2f}",
-        }))
+        st.dataframe(
+            schedule_df.style.format(
+                {
+                    "Payment": "₹{:,.2f}",
+                    "Principal Paid": "₹{:,.2f}",
+                    "Interest Paid": "₹{:,.2f}",
+                    "Remaining Balance": "₹{:,.2f}",
+                }
+            )
+        )
 
     st.write("### Remaining Loan Balance Over Time")
 
