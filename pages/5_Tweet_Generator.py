@@ -5,11 +5,11 @@ from openai import APIError, BadRequestError, NotFoundError, RateLimitError
 
 from utils.generate_prompt import generate_prompt
 from utils.load_json import load_content_formats, load_content_types, load_personalities
-from utils.post import post_to_x
+from utils.post import SocialMediaPoster
 
 try:
     from models.llm import TEXT_MODEL_OPTIONS
-    from widgets.sidebar import setup_sidebar
+    from widgets.sidebar import SidebarManager
 except ImportError as e:
     st.error(f"Failed to import project modules: {e}")
     st.stop()
@@ -17,7 +17,7 @@ except ImportError as e:
 st.set_page_config(page_title="Tweet Generator", page_icon="📲")
 
 try:
-    selected_model_name, client = setup_sidebar(TEXT_MODEL_OPTIONS)
+    selected_model_name, client = SidebarManager(TEXT_MODEL_OPTIONS).setup()
     if client is None:
         st.error("Failed to retrieve API client from sidebar setup.")
         st.stop()
@@ -90,7 +90,7 @@ def generate_content():
                 st.error(f"API Error: {e.message}")
             except Exception as e:
                 st.error(f"An unexpected error occurred during the API call: {e}")
-                # traceback.print_exc() # For debugging in console if needed
+                traceback.print_exc()  # For debugging in console if needed
 
 
 if st.button("Generate Content"):
@@ -105,8 +105,11 @@ if st.session_state["content_generated"]:
     st.markdown(model_response)
     if st.button("Post"):
         try:
-            if tweet := post_to_x(model_response):
-                if type(tweet) == str:
+            from utils.api_config import X_API
+
+            XPoster = SocialMediaPoster("X", api_config=X_API)
+            if tweet := XPoster.post(model_response):
+                if type(tweet) is str:
                     st.success(f"✅ Tweet posted! [View on X]({tweet})")
                 else:
                     st.success("✅ Tweet posted!")

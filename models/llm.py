@@ -1,4 +1,4 @@
-from utils.api import GEMINI_API, OPENAI_API
+from utils.api_config import GEMINI_API, OPENAI_API
 
 
 class Model:
@@ -55,6 +55,13 @@ IMAGEN_3_GENERATE_002 = Model(
 )
 
 TEXT_MODEL_OPTIONS = {
+    GEMINI_2_0_FLASH.model_name: GEMINI_2_0_FLASH,
+    GEMINI_2_0_FLASH_LITE.model_name: GEMINI_2_0_FLASH_LITE,
+    GPT_4O.model_name: GPT_4O,
+    GPT_4O_MINI.model_name: GPT_4O_MINI,
+}
+
+MULTIMODAL_MODEL_OPTIONS = {
     GEMINI_2_0_FLASH.model_name: GEMINI_2_0_FLASH,
     GEMINI_2_0_FLASH_LITE.model_name: GEMINI_2_0_FLASH_LITE,
     GPT_4O.model_name: GPT_4O,

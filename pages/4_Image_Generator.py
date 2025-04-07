@@ -5,7 +5,7 @@ from openai import APIConnectionError, APIError, AuthenticationError, BadRequest
 
 try:
     from models.llm import IMAGE_MODEL_OPTIONS
-    from widgets.sidebar import setup_sidebar
+    from widgets.sidebar import SidebarManager
 except ImportError as e:
     st.error(f"Failed to import project modules: {e}")
     st.stop()
@@ -13,7 +13,7 @@ except ImportError as e:
 st.set_page_config(page_title="Image Generator", page_icon="🎨")
 
 try:
-    selected_model_name, client = setup_sidebar(IMAGE_MODEL_OPTIONS)
+    selected_model_name, client = SidebarManager(IMAGE_MODEL_OPTIONS).setup()
     if client is None:
         st.error("Failed to retrieve API client from sidebar setup.")
         st.stop()
