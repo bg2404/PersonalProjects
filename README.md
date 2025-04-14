@@ -100,7 +100,7 @@ This project requires API keys for the generative model providers and X (Twitter
 
 1. **Activate the Poetry virtual environment:**
     ```bash
-    source .venv/bin/activate
+    poetry env activate
     ```
 
 2. **Run the Streamlit application:**

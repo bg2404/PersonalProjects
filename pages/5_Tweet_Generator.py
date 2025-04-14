@@ -3,6 +3,7 @@ import traceback
 import streamlit as st
 from openai import APIError, BadRequestError, NotFoundError, RateLimitError
 
+from utils.db_handler import DatabaseHandler
 from utils.generate_prompt import generate_prompt
 from utils.load_json import load_content_formats, load_content_types, load_personalities
 from utils.post import SocialMediaPoster
@@ -98,21 +99,31 @@ if st.button("Generate Content"):
 
 st.divider()
 
-
 if st.session_state["content_generated"]:
     model_response = st.session_state["model_response"]
     st.write("### Generated Tweet:")
     st.markdown(model_response)
+
+    db_handler = DatabaseHandler()
+
     if st.button("Post"):
         try:
             from utils.api_config import X_API
 
             XPoster = SocialMediaPoster("X", api_config=X_API)
-            if tweet := XPoster.post(model_response):
-                if type(tweet) is str:
-                    st.success(f"✅ Tweet posted! [View on X]({tweet})")
+            if tweet_status := XPoster.post(model_response):
+                if type(tweet_status) is str:
+                    st.success(f"✅ Tweet posted! [View on X]({tweet_status})")
                 else:
                     st.success("✅ Tweet posted!")
+                tweet_id = db_handler.add_tweet(
+                    model_name=selected_model_name,
+                    personality=personality,
+                    content_type=content_type,
+                    content_format=content_format,
+                    tweet_text=model_response,
+                    posted_url=tweet_status if type(tweet_status) is str else "posted",
+                )
             else:
                 st.error("Failed to post tweet.")
         except Exception as e:

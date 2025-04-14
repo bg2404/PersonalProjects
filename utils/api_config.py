@@ -28,3 +28,9 @@ X_API = {
     "client_id": os.getenv("X_CLIENT_ID"),
     "client_secret": os.getenv("X_CLIENT_SECRET"),
 }
+
+NEWS_API = {
+    "name": "NewsAPI",
+    "key": os.getenv("NEWS_API_KEY"),
+    "url": os.getenv("NEWS_API_URL", "https://newsapi.org/register"),
+}

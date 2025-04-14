@@ -17,7 +17,7 @@ st.header("Explore the Tools")
 
 col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
-col5, _ = st.columns(2)
+col5, col6 = st.columns(2)
 
 with col1:
     st.subheader("🏠 Mortgage Calculator")
@@ -62,6 +62,14 @@ with col5:
         st.page_link("pages/5_Tweet_Generator.py", label="Generate Tweet", icon="📲")
     else:
         st.markdown("[Generate Tweet](5_Tweet_Generator)")
+
+with col6:
+    st.subheader("📊 Tweet Dashboard")
+    st.markdown("View and manage generated tweets.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/6_Tweet_Dashboard.py", label="View Dashboard", icon="📊")
+    else:
+        st.markdown("[View Dashboard](6_Tweet_Dashboard)")
 
 st.divider()
 
