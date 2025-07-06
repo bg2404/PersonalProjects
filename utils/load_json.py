@@ -63,3 +63,16 @@ def load_content_formats(filepath="data/content_format.json"):
         dict: Dictionary of content formats.
     """
     return load_json(filepath)
+
+
+def load_news_articles(filepath="data/news_articles.json"):
+    """
+    Load news articles from a JSON file.
+
+    Args:
+        filepath (str): Path to the JSON file containing news articles.
+
+    Returns:
+        dict: Dictionary of news articles.
+    """
+    return load_json(filepath)

@@ -18,6 +18,8 @@ st.header("Explore the Tools")
 col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
 col5, col6 = st.columns(2)
+col7, col8 = st.columns(2)
+col9, col10 = st.columns(2)
 
 with col1:
     st.subheader("🏠 Mortgage Calculator")
@@ -70,6 +72,38 @@ with col6:
         st.page_link("pages/6_Tweet_Dashboard.py", label="View Dashboard", icon="📊")
     else:
         st.markdown("[View Dashboard](6_Tweet_Dashboard)")
+
+with col7:
+    st.subheader("📈 News Retriever")
+    st.markdown("Enter a topic to get the latest news.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/7_News_Retriever.py", label="Get News", icon="📈")
+    else:
+        st.markdown("[Get News](7_News_Retriever)")
+
+with col8:
+    st.subheader("📰 Article Generator")
+    st.markdown("Generate Articles.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/8_Article_Generator.py", label="Generate Article", icon="📰")
+    else:
+        st.markdown("[Generate Article](8_Article_Generator)")
+
+with col9:
+    st.subheader("📰 Finshots Scraper")
+    st.markdown("Scrape articles from Finshots.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/9_Finshots_scraper.py", label="Scrape Articles", icon="📰")
+    else:
+        st.markdown("[Scrape Articles](9_Finshots_scraper)")
+
+with col10:
+    st.subheader("📈 Index Creator")
+    st.markdown("Create an index for top 100 US stocks by market cap.")
+    if hasattr(st, "page_link"):
+        st.page_link("pages/10_Index_Creator.py", label="Create Index", icon="📈")
+    else:
+        st.markdown("[Create Index](10_Index_Creator)")
 
 st.divider()
 

@@ -34,3 +34,9 @@ NEWS_API = {
     "key": os.getenv("NEWS_API_KEY"),
     "url": os.getenv("NEWS_API_URL", "https://newsapi.org/register"),
 }
+
+POLYGON_API = {
+    "name": "Polygon",
+    "key": os.getenv("POLYGON_API_KEY"),
+    "url": os.getenv("POLYGON_API_URL", "https://api.polygon.io/"),
+}

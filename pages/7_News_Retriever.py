@@ -3,7 +3,6 @@ import urllib.parse
 from urllib.request import Request, urlopen
 
 import streamlit as st
-from moneycontrol import moneycontrol_api as mc
 
 from utils.api_config import NEWS_API
 
@@ -26,7 +25,7 @@ def get_news(query):
     base_url = "https://newsapi.org/v2/everything"
     # URL-encode the query to handle spaces and special characters
     encoded_query = urllib.parse.quote_plus(query)
-    url = f"{base_url}?q={encoded_query}&apiKey={api_key}&sources=cnn"
+    url = f"{base_url}?q={encoded_query}&apiKey={api_key}"
     req = Request(url, headers={"User-Agent": "Mozilla/5.0"})  # Add user agent to avoid blocking
     try:
         with urlopen(req) as response:

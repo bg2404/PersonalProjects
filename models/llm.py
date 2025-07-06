@@ -42,6 +42,24 @@ GPT_4O_MINI = Model(
     api=OPENAI_API,
 )
 
+GPT_4_1 = Model(
+    name="GPT-4.1",
+    model_name="gpt-4.1",
+    api=OPENAI_API,
+)
+
+GPT_4_1_MINI = Model(
+    name="GPT-4.1 Mini",
+    model_name="gpt-4.1-mini",
+    api=OPENAI_API,
+)
+
+GPT_4_5O = Model(
+    name="GPT-4.5o",
+    model_name="gpt-4.5-preview-2025-02-27",
+    api=OPENAI_API,
+)
+
 # Image Generation Models
 DALL_E_3 = Model(
     name="DALL-E 3",
@@ -59,6 +77,9 @@ TEXT_MODEL_OPTIONS = {
     GEMINI_2_0_FLASH_LITE.model_name: GEMINI_2_0_FLASH_LITE,
     GPT_4O.model_name: GPT_4O,
     GPT_4O_MINI.model_name: GPT_4O_MINI,
+    GPT_4_1.model_name: GPT_4_1,
+    GPT_4_1_MINI.model_name: GPT_4_1_MINI,
+    # GPT_4_5O.model_name: GPT_4_5O,
 }
 
 MULTIMODAL_MODEL_OPTIONS = {
